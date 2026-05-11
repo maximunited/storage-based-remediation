@@ -120,6 +120,10 @@ func (c *failingRemediationGetClient) IsObjectNamespaced(obj runtime.Object) (bo
 	return c.delegate.IsObjectNamespaced(obj)
 }
 
+func (c *failingRemediationGetClient) Apply(ctx context.Context, obj runtime.ApplyConfiguration, opts ...client.ApplyOption) error {
+	return c.delegate.Apply(ctx, obj, opts...)
+}
+
 var _ client.Client = &failingRemediationGetClient{}
 
 // createTestSBRAgent creates a test SBR agent with mock devices and temporary SBR files

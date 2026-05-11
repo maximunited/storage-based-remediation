@@ -570,20 +570,20 @@ CONTROLLER_GEN = $(CONTROLLER_GEN_DIR)/$(CONTROLLER_GEN_VERSION)/controller-gen
 SORT_IMPORTS = $(SORT_IMPORTS_DIR)/$(SORT_IMPORTS_VERSION)/sort-imports
 
 ## Tool Versions
-KUSTOMIZE_VERSION ?= v5@v5.8.0
-CONTROLLER_GEN_VERSION ?= v0.18.0
+KUSTOMIZE_VERSION ?= v5@v5.8.1
+CONTROLLER_GEN_VERSION ?= v0.20.1
 #ENVTEST_VERSION is the version of controller-runtime release branch to fetch the envtest setup script (i.e. release-0.20)
 ENVTEST_VERSION ?= $(shell go list -m -f "{{ .Version }}" sigs.k8s.io/controller-runtime | awk -F'[v.]' '{printf "release-%d.%d", $$2, $$3}')
 #ENVTEST_K8S_VERSION is the version of Kubernetes to use for setting up ENVTEST binaries (i.e. 1.31)
 ENVTEST_K8S_VERSION ?= $(shell go list -m -f "{{ .Version }}" k8s.io/api | awk -F'[v.]' '{printf "1.%d", $$3}')
 GOLANGCI_LINT_VERSION ?= v2.1.0
-GINKGO_VERSION ?= v2.27.5
+GINKGO_VERSION ?= v2.28.3
 # See https://github.com/slintes/sort-imports/releases for the last version
 SORT_IMPORTS_VERSION = v0.3.0
 
 # OLM tooling versions (aligned with other operators)
-OPERATOR_SDK_VERSION ?= v1.33.0
-OPM_VERSION ?= v1.36.0
+OPERATOR_SDK_VERSION ?= v1.42.2
+OPM_VERSION ?= v1.66.0
 
 # OLM bundle channels/default (aligned defaults)
 CHANNELS ?= stable
@@ -592,7 +592,7 @@ DEFAULT_CHANNEL ?= stable
 # CSV patch helpers
 YQ = $(YQ_DIR)/$(YQ_API_VERSION)-$(YQ_VERSION)/yq
 YQ_API_VERSION = v4
-YQ_VERSION ?= v4.44.1
+YQ_VERSION ?= v4.53.2
 # Icon configuration
 BLUE_ICON_PATH = "./config/assets/medik8s_blue_icon.png"
 
