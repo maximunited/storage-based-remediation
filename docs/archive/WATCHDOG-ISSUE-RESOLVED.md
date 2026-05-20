@@ -63,19 +63,20 @@ The SBD agent's watchdog implementation should be updated to:
 ```go
 func keepWatchdogAlive(fd int) error {
     // Try ioctl first
-    if err := syscall.Syscall(syscall.SYS_IOCTL, uintptr(fd), WDIOC_KEEPALIVE, 0); err == 0 {
+    _, _, errno := syscall.Syscall(syscall.SYS_IOCTL, uintptr(fd), WDIOC_KEEPALIVE, 0)
+    if errno == 0 {
         return nil // ioctl worked
     }
-    
+
     // Check if it's ENOTTY (unsupported ioctl)
-    if err == syscall.ENOTTY {
+    if errno == syscall.ENOTTY {
         // Fallback to write-based keep-alive
         dummy := []byte{0}
         _, writeErr := syscall.Write(fd, dummy)
         return writeErr
     }
-    
-    return err // Other ioctl error
+
+    return errno // Other ioctl error
 }
 ```
 

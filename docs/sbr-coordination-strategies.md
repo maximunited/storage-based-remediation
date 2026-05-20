@@ -188,9 +188,6 @@ grep "coordinationStrategy" /var/log/sbr-agent.log
 ```
 
 **Process Crashes and Lock Recovery:**
-```
-# Symptoms: Concern about deadlocks if SBR agent crashes while holding lock
-# Solution: No action needed - POSIX guarantees automatic lock release
 
 ```text
 Symptoms: Concern about deadlocks if SBD agent crashes while holding lock

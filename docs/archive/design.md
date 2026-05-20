@@ -15,7 +15,7 @@ Current Kubernetes node remediation solutions often rely on IPMI/iDRAC for fenci
 ## 3. Core Mechanism: SBD via CSI Block PV
 
 * **Principle:** Adapt the traditional SBD protocol for Kubernetes. SBD relies on a shared, low-latency block device for inter-node liveness signaling and "death" messages.
-* **Shared "Watchdog" Device:** A single, dedicated `Block PersistentVolume (PV)` will serve as the SBD signalling mechanism.
+* **Shared "Watchdog" Device:** A single, dedicated `Block PersistentVolume (PV)` will serve as the SBD signaling mechanism.
   * **Provisioning:** This PV must be provisioned via a CSI driver that supports `volumeMode: Block` and, critically, **concurrent multi-node block access** (conceptually `ReadWriteMany` at the block level). Examples include specific cloud provider shared block storage or `ceph-csi` for shared RBD.
   * **Access:** Each participating node will mount this *exact same* PV as a raw block device (e.g., `/dev/sbd-watchdog`) within the SBD Agent pod.
 * **SBD Protocol:** The SBD Agent will implement the SBD protocol's specific byte offsets and message structures for heartbeats, peer status, and fencing instructions directly on this raw block device.
@@ -68,7 +68,7 @@ Current Kubernetes node remediation solutions often rely on IPMI/iDRAC for fenci
 * **SBD Agent Failures:** DaemonSet restarts, local kernel watchdog acts as self-fence, peer fencing as fallback.
 * **Shared SBD Block Device Issues:** Immediate self-fencing of affected nodes by local kernel watchdog due to inability to pet. Monitoring and alerts.
 * **Local Kernel Watchdog Failure:** Pre-flight checks on agent startup, refusal to participate if unavailable, configurable fallback to `systemctl reboot`.
-* **Kubernetes API Server Issues/Quorum Loss:** Core SBD signalling on shared device remains operational. No *new* external fencing requests are processed (safe mode). Leader election fails, preventing uncoordinated fencing.
+* **Kubernetes API Server Issues/Quorum Loss:** Core SBD signaling on shared device remains operational. No *new* external fencing requests are processed (safe mode). Leader election fails, preventing uncoordinated fencing.
 * **Node Healthcheck Operator Failure:** Operator resilience (HA deployment). Core SBD self-fencing still functions as a last line of defense.
 * **Concurrent Fencing Attempts/Race Conditions:** SBD protocol idempotency, leader election, and targeted messaging mitigate.
 * **"Zombie" SBD Devices:** Potential future cleanup mechanism for stale entries.

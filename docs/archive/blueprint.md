@@ -4046,4 +4046,4 @@ Please generate the Kubernetes CustomResourceDefinition (CRD) YAML for `SBDConfi
 - `sbdTimeoutSeconds` (integer, required): The SBD timeout in seconds.
 - `sbdWatchdogPath` (string, required): The path to the local kernel watchdog device (e.g., `/dev/watchdog`).
 - `nodeExclusionList` (array of strings, optional): A list of node names to exclude from SBD management.
-- `rebootMethod` (string, optional, default: "panic"): The method to use for self-reboot
+- `rebootMethod` (string, optional, default: "panic"): The method to use for self-fencing (e.g., "panic", "systemctl-reboot")

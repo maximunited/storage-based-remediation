@@ -32,6 +32,7 @@ kubectl apply -f config/rbac/sbr_operator_role_binding.yaml
 ## Permission Summary
 
 ### SBR Agent Permissions (Read-Only)
+
 | Resource | Permissions | Purpose |
 | -------- | ----------- | ------- |
 | `pods` | `get`, `list` | Read own pod metadata |
@@ -39,6 +40,7 @@ kubectl apply -f config/rbac/sbr_operator_role_binding.yaml
 | `events` | `create`, `patch` | Observability events |
 
 ### SBR Operator Permissions (Management)
+
 | Resource | Permissions | Purpose |
 | -------- | ----------- | ------- |
 | `namespaces` | `create`, `get`, `list`, `patch`, `update`, `watch` | Namespace management |

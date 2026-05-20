@@ -118,7 +118,7 @@ time.Sleep(jitter)
 
 **Why**: Spreads out write attempts across time to reduce collision probability.
 
-### 2. **Exponential Backoff with Jitter**
+### 3. **Exponential Backoff with Jitter**
 
 ```go
 baseDelay := AtomicRetryDelay * time.Duration(1<<attempt) // 100ms, 200ms, 400ms...
